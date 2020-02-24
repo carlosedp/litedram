@@ -339,6 +339,22 @@ class MT41J128M16(SDRAMModule):
 class MT41K128M16(MT41J128M16):
     pass
 
+class MT41K1G8SN(SDRAMModule):
+    memtype = "DDR3"
+    # geometry
+    nbanks = 8
+    nrows  = 131072
+    ncols  = 2048
+    # timings
+    technology_timings = _TechnologyTimings(tREFI=64e6/8192, tWTR=(4, 7.5), tCCD=(4, None), tRRD=(4, 10), tZQCS=(64, 80))
+    speedgrade_timings = {
+        "800":  _SpeedgradeTimings(tRP=6,  tRCD=6,  tWR=6,  tRFC=(140, None), tFAW=(None, 20), tRAS=37.5),
+        "1066": _SpeedgradeTimings(tRP=8,  tRCD=8,  tWR=8,  tRFC=(187, None), tFAW=(None, 27), tRAS=37.5),
+        "1333": _SpeedgradeTimings(tRP=10, tRCD=10, tWR=10, tRFC=(234, None), tFAW=(None, 30), tRAS=36),
+        "1600": _SpeedgradeTimings(tRP=11, tRCD=11, tWR=11, tRFC=(280, None), tFAW=(None, 32), tRAS=35),
+        "1866": _SpeedgradeTimings(tRP=13, tRCD=13, tWR=13, tRFC=(328, None), tFAW=(None, 33), tRAS=35),
+    }
+    speedgrade_timings["default"] = speedgrade_timings["1600"]
 
 class MT41J256M16(SDRAMModule):
     memtype = "DDR3"
